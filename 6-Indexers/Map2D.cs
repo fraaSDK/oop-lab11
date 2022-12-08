@@ -10,7 +10,7 @@ namespace Indexers
         private readonly Dictionary<Tuple<TKey1,TKey2>,TValue> _map = new Dictionary<Tuple<TKey1, TKey2>, TValue>();
         
         /// <inheritdoc cref="IMap2D{TKey1, TKey2, TValue}.NumberOfElements" />
-        int IMap2D<TKey1, TKey2, TValue>.NumberOfElements => _map.Count;
+        public int NumberOfElements => _map.Count;
 
         /// <inheritdoc cref="IMap2D{TKey1, TKey2, TValue}.this" />
         TValue IMap2D<TKey1, TKey2, TValue>.this[TKey1 key1, TKey2 key2]
