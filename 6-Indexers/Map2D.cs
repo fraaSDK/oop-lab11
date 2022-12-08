@@ -13,14 +13,14 @@ namespace Indexers
         public int NumberOfElements => _map.Count;
 
         /// <inheritdoc cref="IMap2D{TKey1, TKey2, TValue}.this" />
-        TValue IMap2D<TKey1, TKey2, TValue>.this[TKey1 key1, TKey2 key2]
+        public TValue this[TKey1 key1, TKey2 key2]
         {
             set => _map.Add(new Tuple<TKey1, TKey2>(key1, key2), value);
             get => _map[new Tuple<TKey1, TKey2>(key1, key2)];
         }
 
         /// <inheritdoc cref="IMap2D{TKey1, TKey2, TValue}.GetRow(TKey1)" />
-        IList<Tuple<TKey2, TValue>> IMap2D<TKey1, TKey2, TValue>.GetRow(TKey1 key1)
+        public IList<Tuple<TKey2, TValue>> GetRow(TKey1 key1)
         {
             return _map.Keys
                 .Where(t => t.Item1.Equals(key1))
@@ -29,7 +29,7 @@ namespace Indexers
         }
 
         /// <inheritdoc cref="IMap2D{TKey1, TKey2, TValue}.GetColumn(TKey2)" />
-        IList<Tuple<TKey1, TValue>> IMap2D<TKey1, TKey2, TValue>.GetColumn(TKey2 key2)
+        public IList<Tuple<TKey1, TValue>> GetColumn(TKey2 key2)
         {
             return _map.Keys
                 .Where(t => t.Item2.Equals(key2))
@@ -38,7 +38,7 @@ namespace Indexers
         }
 
         /// <inheritdoc cref="IMap2D{TKey1, TKey2, TValue}.GetElements" />
-        IList<Tuple<TKey1, TKey2, TValue>> IMap2D<TKey1, TKey2, TValue>.GetElements()
+        public IList<Tuple<TKey1, TKey2, TValue>> GetElements()
         {
             return _map
                 .Select(t => new Tuple<TKey1, TKey2, TValue>(t.Key.Item1, t.Key.Item2, t.Value))
@@ -46,7 +46,7 @@ namespace Indexers
         }
 
         /// <inheritdoc cref="IMap2D{TKey1, TKey2, TValue}.Fill(IEnumerable{TKey1}, IEnumerable{TKey2}, Func{TKey1, TKey2, TValue})" />
-        void IMap2D<TKey1, TKey2, TValue>.Fill(IEnumerable<TKey1> keys1, IEnumerable<TKey2> keys2, Func<TKey1, TKey2, TValue> generator)
+        public void Fill(IEnumerable<TKey1> keys1, IEnumerable<TKey2> keys2, Func<TKey1, TKey2, TValue> generator)
         {
             var keys2Array = keys2.ToArray();   // Preventing possible multiple enumeration warning.
             foreach (var k1 in keys1)
