@@ -60,6 +60,7 @@ namespace Calculus
                     break;
             }
             _currentOp = null;
+            _tmpResult = null;
         }
         
         public void Reset()
